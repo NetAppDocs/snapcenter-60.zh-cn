@@ -1,0 +1,201 @@
+---
+permalink: protect-hana/task_create_backup_policies_for_sap_hana_databases.html 
+sidebar: sidebar 
+keywords: SnapCenter Plug-in for SAP HANA Database 
+summary: 在使用 SnapCenter 备份 SAP HANA 数据库资源之前，您必须为要备份的资源或资源组创建备份策略。备份策略是一组规则，用于控制如何管理，计划和保留备份。 
+---
+= 为 SAP HANA 数据库创建备份策略
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在使用 SnapCenter 备份 SAP HANA 数据库资源之前，您必须为要备份的资源或资源组创建备份策略。备份策略是一组规则，用于控制如何管理，计划和保留备份。
+
+.开始之前
+* 您必须已定义备份策略。
++
+有关详细信息，请参见有关为 SAP HANA 数据库定义数据保护策略的信息。
+
+* 您必须已通过完成安装 SnapCenter ，添加主机，设置存储系统连接和添加资源等任务为数据保护做好准备。
+* 如果要将快照复制到镜像或存储、SnapCenter管理员必须已将源卷和目标卷的SVM分配给您。
++
+此外，您还可以在策略中指定复制，脚本和应用程序设置。如果要将策略重复用于其他资源组，这些选项可节省时间。
+
+* 查看SnapMirror主动同步的特定前提条件和限制。有关信息，请参阅 https://docs.netapp.com/us-en/ontap/smbc/considerations-limits.html#volumes["SnapMirror活动同步的对象限制"]。
+
+
+.关于此任务
+* SAP HANA 系统复制
++
+** 您可以保护主 SAP HANA 系统，并且可以执行所有数据保护操作。
+** 您可以保护二级 SAP HANA 系统，但无法创建备份。
++
+故障转移后，可以在二级 SAP HANA 系统成为主 SAP HANA 系统时执行所有数据保护操作。
+
++
+您不能为 SAP HANA 数据卷创建备份，但 SnapCenter 会继续保护非数据卷（ NDV ）。
+
+
+
+* SnapLock
++
+** 如果选择了"将备份副本保留特定天数"选项、则SnapLock保留期限必须小于或等于上述保留天数。
+** 指定Snapshot锁定期限可防止删除Snapshot、直到保留期限到期为止。这样可能会导致保留的Snapshot数量超过策略中指定的数量。
+** 对于ONTAP 9.12.1及更低版本、在还原过程中从SnapLock存储快照创建的克隆将继承SnapLock存储到期时间。存储管理员应在SnapLock到期时间后手动清理克隆。
+
+
+
+
+
+NOTE: 主SnapLock设置在SnapCenter备份策略中进行管理、辅SnapLock设置由ONTAP进行管理。
+
+.步骤
+. 在左侧导航窗格中，单击 * 设置 * 。
+. 在设置页面中，单击 * 策略 * 。
+. 单击 * 新建 * 。
+. 在名称页面中，输入策略名称和问题描述。
+. 在设置页面中，执行以下步骤：
++
+** 选择备份类型：
++
+|===
+| 如果要... | 操作 
+
+
+ a| 
+对数据库执行完整性检查
+ a| 
+选择 * 基于文件的备份 * 。仅备份活动租户。
+
+
+
+ a| 
+使用Snapshot技术创建备份
+ a| 
+选择 * 基于 Snapshot * 。
+
+|===
+** 通过选择 * 按需 * ， * 每小时 * ， * 每日 * ， * 每周 * 或 * 每月 * 来指定计划类型。
++
+
+NOTE: 您可以在创建资源组时为备份操作指定计划（开始日期，结束日期和频率）。这样，您就可以创建共享相同策略和备份频率的资源组，但也可以为每个策略分配不同的备份计划。
+
++
+image::../media/backup_settings.gif[备份设置]
+
++
+
+NOTE: 如果计划在凌晨2：00执行、则在夏令时(DST)期间不会触发该计划。
+
+** 在 * 自定义备份设置 * 部分中，提供必须以密钥值格式传递到插件的任何特定备份设置。
++
+您可以提供多个要传递到插件的密钥值。
+
+
+
+. 在保留页面中，指定备份类型的保留设置以及在备份类型页面中选择的计划类型：
++
+|===
+| 如果要... | 然后... 
+
+
+ a| 
+保留一定数量的快照
+ a| 
+选择*要保留的Snapshot副本总数*、然后指定要保留的Snapshot数量。
+
+如果快照数量超过指定数量、则会删除快照、并首先删除最早的副本。
+
+
+NOTE: 对于 ONTAP 9.4 或更高版本上的资源，最大保留值为 1018 ，对于 ONTAP 9.3 或更早版本上的资源，最大保留值为 254 。如果将保留设置为高于底层 ONTAP 版本支持的值，则备份将失败。
+
+
+IMPORTANT: 对于基于 Snapshot 副本的备份，如果计划启用 SnapVault 复制，则必须将保留计数设置为 2 或更高。如果将保留计数设置为1、则保留操作可能会失败、因为第一个快照是SnapVault关系的参考快照、直到将较新的快照复制到目标为止。
+
+
+NOTE: 对于 SAP HANA 系统复制，建议将 SAP HANA 系统的所有资源添加到一个资源组中。这样可以确保保留正确数量的备份。
+
+
+NOTE: 对于SAP HANA系统复制、生成的Snapshot总数将等于为资源组设置的保留时间。删除最旧Snapshot取决于最旧Snapshot所在的节点。例如，对于使用 SAP HANA System Replication primary 和 SAP HANA System Replication secondary 的资源组，保留设置为 7 。一次最多可以创建7个快照、包括SAP HANA系统复制主系统和SAP HANA系统复制二级系统。
+
+
+
+ a| 
+将Snapshot保留一定天数
+ a| 
+选择*保留Snapshot副本的时间*、然后指定要在删除快照之前保留这些快照的天数。
+
+
+
+ a| 
+Snapshot副本锁定期限
+ a| 
+选择Snapshot副本锁定期限、然后选择天、月或年。
+
+SnapLock保留期限应少于100年。
+
+|===
+. 对于基于 Snapshot 副本的备份，请在复制页面中指定复制设置：
++
+|===
+| 对于此字段 ... | 操作 
+
+
+ a| 
+* 创建本地 Snapshot 副本后更新 SnapMirror *
+ a| 
+选择此字段可在另一个卷上创建备份集的镜像副本（ SnapMirror 复制）。
+
+对于SnapMirror活动同步、应启用此选项。
+
+如果ONTAP中的保护关系类型为"镜像和存储"、而您仅选择此选项、则在主系统上创建的快照不会传输到目标系统、而是会在目标系统中列出。如果从目标中选择了此Snapshot来执行还原操作、则会显示"Secondary Location is not available for the selected vauled/Mirrored backup (辅助位置不可用于选定存储/镜像备份)"错误消息。
+
+在二级复制期间、SnapLock到期时间会加载主SnapLock到期时间。
+
+单击"Topology"页面中的*Refresh*按钮可刷新从ONTAP检索到的二级和主SnapLock到期时间。
+
+请参阅。 link:../protect-hana/task_view_sap_hana_database_backups_and_clones_in_the_topology_page_sap_hana.html["在拓扑页面中查看 SAP HANA 数据库备份和克隆"]
+
+
+
+ a| 
+* 创建本地 Snapshot 副本后更新 SnapVault *
+ a| 
+选择此选项可执行磁盘到磁盘备份复制（ SnapVault 备份）。
+
+在二级复制期间、SnapLock到期时间会加载主SnapLock到期时间。单击"Topology"页面中的*Refresh*按钮可刷新从ONTAP检索到的二级和主SnapLock到期时间。
+
+如果仅在ONTAP中称为SnapLock存储的二级系统上配置了SnapLock，则单击“拓扑”页面中的*Refresh*按钮可刷新从ONTAP检索到的二级系统上的锁定期限。
+
+有关SnapLock存储的详细信息、请参见 https://docs.netapp.com/us-en/ontap/snaplock/commit-snapshot-copies-worm-concept.html["将Snapshot副本提交到存储目标上的WORM"]
+
+请参阅。 link:task_view_sap_hana_database_backups_and_clones_in_the_topology_page_sap_hana.html["在拓扑页面中查看 SAP HANA 数据库备份和克隆"]
+
+
+
+ a| 
+* 二级策略标签 *
+ a| 
+选择 Snapshot 标签。
+
+根据您选择的Snapshot标签、ONTAP会应用与该标签匹配的二级Snapshot保留策略。
+
+
+NOTE: 如果选择了 * 创建本地 Snapshot 副本后更新 Snapmirror* ，则可以选择指定二级策略标签。但是，如果在创建本地 Snapshot 副本之后选择了 * 更新 SnapVault * ，则应指定二级策略标签。
+
+
+
+ a| 
+* 错误重试计数 *
+ a| 
+输入操作停止前允许的最大复制尝试次数。
+
+|===
++
+
+NOTE: 您应在ONTAP中为二级存储配置SnapMirror保留策略、以避免达到二级存储上Snapshot的最大限制。
+
+. 查看摘要，然后单击 * 完成 * 。
+

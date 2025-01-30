@@ -1,0 +1,104 @@
+---
+permalink: install/concept_snapcenter_licenses.html 
+sidebar: sidebar 
+keywords: licenses, FAS, AFF, ASA, SnapMirror, SnapVault, SnapRestore, FlexClone, SMBR, Single Mailbox Recovery 
+summary: SnapCenter 需要多个许可证才能启用数据保护操作。您安装的 SnapCenter 许可证类型取决于您的存储环境和要使用的功能。 
+---
+= SnapCenter 许可证
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapCenter 需要多个许可证才能对应用程序，数据库，文件系统和虚拟机进行数据保护。您安装的 SnapCenter 许可证类型取决于您的存储环境和要使用的功能。
+
+|===
+| 许可证 | 必要时 
+
+
+ a| 
+基于 SnapCenter 标准控制器
+ a| 
+对于FAS、AFF、全SAN阵列(ASA)为必需项
+
+SnapCenter标准版许可证是基于控制器的许可证、包含在ONTAP One中。如果您拥有 SnapManager 套件许可证，则还可以获得 SnapCenter 标准许可证授权。如果您要在FAS、AFF或ASA存储中试用SnapCenter、可以联系销售代表来获取ONTAP One评估版许可证。
+
+有关ONTAP One附带的许可证的信息，请参阅 https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["ONTAP One附带的许可证"]。
+
+
+NOTE: SnapCenter 也作为数据保护包的一部分提供。如果您购买的是 A400 或更高版本，则应购买数据保护包。
+
+
+
+ a| 
+SnapMirror 或 SnapVault
+ a| 
+ONTAP
+
+如果在 SnapCenter 中启用了复制，则需要 SnapMirror 或 SnapVault 许可证。
+
+
+
+ a| 
+SnapRestore
+ a| 
+用于还原和验证备份。
+
+在主存储系统上
+
+* 在 SnapVault 目标系统上执行远程验证和从备份中还原时需要使用。
+* SnapMirror 目标系统上执行远程验证所需的。
+
+
+
+
+ a| 
+FlexClone
+ a| 
+克隆数据库和验证操作所需。
+
+在主存储系统和二级存储系统上。
+
+* 在 SnapVault 目标系统上需要此功能才能从二级存储备份创建克隆。
+* 在 SnapMirror 目标系统上需要使用此功能从二级 SnapMirror 备份创建克隆。
+
+
+
+
+ a| 
+协议
+ a| 
+* LUN 的 iSCSI 或 FC 许可证
+* SMB 共享的 CIFS 许可证
+* NFS 类型 VMDK 的 NFS 许可证
+* VMFS 类型 VMDK 的 iSCSI 或 FC 许可证
+
+
+如果源卷不可用，则 SnapMirror 目标系统需要提供数据。
+
+
+
+ a| 
+SnapCenter 标准许可证（可选）
+ a| 
+二级目标
+
+
+NOTE: 建议（但不要求）将 SnapCenter 标准版许可证添加到二级目标。如果二级目标上未启用 SnapCenter 标准许可证，则在执行故障转移操作后，您将无法使用 SnapCenter 备份二级目标上的资源。但是，要执行克隆和验证操作，二级目标需要 FlexClone 许可证。
+
+|===
+
+NOTE: SnapCenter 高级版和 SnapCenter NAS 文件服务许可证已弃用，不再可用。Amazon FSx for NetApp ONTAP、ONTAP Select、Cloud Volumes ONTAP和Azure NetApp Files不再需要标准许可证和基于容量的许可证。
+
+您应安装一个或多个 SnapCenter 许可证。有关如何添加许可证的信息，请参见 link:../install/concept_snapcenter_standard_controller_based_licenses.html["添加基于 SnapCenter 标准控制器的许可证"]。
+
+
+
+== 单邮箱恢复（ SMBR ）许可证
+
+如果您使用适用于 Exchange 的 SnapCenter 插件管理 Microsoft Exchange Server 数据库和单邮箱恢复（ SMBR ），则需要为 SMBR 提供额外的许可证，此许可证需要根据用户邮箱单独购买。
+
+NetApp®Single Mailbox Recovery已于2023年5月12日终止提供(EOA)。有关详细信息，请参阅 link:https://mysupport.netapp.com/info/communications/ECMLP2885729.html["CPC-00507"]。在支持授权期间、NetApp将继续通过2020年6月24日推出的营销部件号为已购买邮箱容量、维护和支持的客户提供支持。
+
+NetApp Single Mailbox Recovery是Ontrack提供的合作伙伴产品。Ontrack PowerControls提供的功能与NetApp Single Mailbox Recovery类似。在EOA日期2023年5月12日之后、客户可以从Ontrack (通过licensingteam@ontrack.com)购买新的Ontrack PowerControls软件许可证以及Ontrack PowerControls维护和支持续订、以实现邮箱粒度恢复。

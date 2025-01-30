@@ -1,0 +1,178 @@
+---
+permalink: protect-mysql/clone-mysql-backup.html 
+sidebar: sidebar 
+keywords: SnapCenter Plug-in for MySQL,run as 
+summary: 您可以使用 SnapCenter 克隆备份。您可以从主备份或二级备份克隆。 
+---
+= 克隆MySQL备份
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 SnapCenter 克隆备份。您可以从主备份或二级备份克隆。
+
+.开始之前
+* 您应已备份资源或资源组。
+* 您应确保托管卷的聚合应位于 Storage Virtual Machine （ SVM ）的已分配聚合列表中。
+* 对于克隆前或克隆后命令、您应通过以下路径检查这些命令是否位于插件主机上的命令列表中：
++
+** Windows主机上的默认位置：_C：\Program NetApp SnapCenter SnapCenter Plug-in Creper\ETC\Allowed_commands.config_
+** Linux主机上的默认位置：/opt/linux/linux/SCC//etc/Allowed_commands.config_ NetApp SnapCenter
+
+
+
+
+
+NOTE: 如果命令列表中不存在这些命令、则操作将失败。*对于MySQL 5.7版本、应在MySQL中设置ignore_MYSQLX/port = true (默认为false)。 属性文件。
+
+.关于此任务
+* 您无法保护克隆的MySQL实例。
+* 有关克隆拆分操作限制的信息，请参见 http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/home.html["《 ONTAP 9 逻辑存储管理指南》"^]。
+* 对于存储.12.1及更早版本、在还原过程中从SnapLock ONTAP 9快照创建的克隆将继承SnapLock存储到期时间。存储管理员应在SnapLock到期时间后手动清理克隆。
+
+
+[role="tabbed-block"]
+====
+.SnapCenter UI
+--
+.步骤
+. 在左侧导航窗格中，单击 * 资源 * ，然后从列表中选择相应的插件。
+. 在资源页面中，根据资源类型从 * 视图 * 下拉列表中筛选资源。
++
+此时将显示资源以及类型，主机，关联的资源组和策略以及状态等信息。
+
+. 选择资源或资源组。
++
+如果选择资源组，则必须选择一个资源。
+
++
+此时将显示资源或资源组拓扑页面。
+
+. 在管理副本视图中，从主存储系统或二级（镜像或存储）存储系统中选择 * 备份 * 。
+. 从表中选择数据备份，然后单击 image:../media/clone_icon.gif["克隆图标"]。
+. 在位置页面中，执行以下操作：
++
+|===
+| 对于此字段 ... | 操作 
+
+
+ a| 
+克隆服务器
+ a| 
+选择应在其中创建克隆的主机。
+
+
+
+ a| 
+端口
+ a| 
+提供要启动克隆的MySQL实例的端口。
+
+
+
+ a| 
+NFS 导出 IP 地址
+ a| 
+输入要导出克隆卷的 IP 地址或主机名。
+
+|===
+. 在脚本页面中，执行以下步骤：
++
+
+NOTE: 这些脚本将在插件主机上运行。
+
++
+.. 输入克隆前或克隆后分别应在克隆操作之前或之后运行的命令。
++
+*** 预克隆命令：删除同名的现有数据库
+*** 克隆后命令：验证数据库或启动数据库。
+
+
+.. 输入 mount 命令将文件系统挂载到主机。
++
+Linux 计算机上卷或 qtree 的 mount 命令：
+
++
+NFS示例： `mount VSERVER_DATA_IP:%VOLUME_NAME_Clone /mnt`
+
+
+
+. 在通知页面的 * 电子邮件首选项 * 下拉列表中，选择要发送电子邮件的场景。
++
+您还必须指定发件人和收件人电子邮件地址以及电子邮件主题。
+
+. 查看摘要，然后单击 * 完成 * 。
+. 单击 * 监控 * > * 作业 * 以监控操作进度。
+
+
+--
+.PowerShell cmdlet
+--
+.步骤
+. 使用 Open-SmConnection cmdlet 为指定用户启动与 SnapCenter 服务器的连接会话。
++
+[listing]
+----
+PS C:\> Open-SmConnection  -SMSbaseurl  https:\\snapctr.demo.netapp.com:8146/
+----
+. 使用 Get-SmBackup cmdlet 检索备份以执行克隆操作。
++
+此示例显示有两个可用于克隆的备份：
+
++
+[listing]
+----
+ C:\PS> Get-SmBackup
+
+        BackupId                      BackupName                    BackupTime                    BackupType
+        --------                      ----------                    ----------                    ----------
+         1                     Payroll Dataset_vise-f6_08... 8/4/2015 11:02:32 AM          Full Backup
+         2                     Payroll Dataset_vise-f6_08... 8/4/2015 11:23:17 AM
+----
+. 从现有备份启动克隆操作，并指定导出克隆卷所使用的 NFS 导出 IP 地址。
++
+此示例显示要克隆的备份的NFSExportIP地址为10.32.212.14：
+
++
+[listing]
+----
+PS C:\> New-SmClone -AppPluginCode MySQL -BackupName "scs000211748_gdl_englab_netapp_com_MySQL_mysqld_3306_scs000211748_06-26-2024_06.08.35.4307" -Resources @{"Host"="scs000211748.gdl.englab.netapp.com";"Uid"="mysqld_3306"} -Port 3320 -CloneToHost shivarhel30.rtp.openenglab.netapp.com
+----
++
+
+NOTE: 如果未指定 NFSExportIP ，则默认值将导出到克隆目标主机。
+
+. 使用 Get-SmCloneReport cmdlet 查看克隆作业详细信息，验证是否已成功克隆备份。
++
+您可以查看克隆 ID ，开始日期和时间，结束日期和时间等详细信息。
+
++
+[listing]
+----
+PS C:\> Get-SmCloneReport -JobId 186
+
+    SmCloneId           : 1
+    SmJobId             : 186
+    StartDateTime       : 8/3/2015 2:43:02 PM
+    EndDateTime         : 8/3/2015 2:44:08 PM
+    Duration            : 00:01:06.6760000
+    Status              : Completed
+    ProtectionGroupName : Draper
+    SmProtectionGroupId : 4
+    PolicyName          : OnDemand_Clone
+    SmPolicyId          : 4
+    BackupPolicyName    : OnDemand_Full_Log
+    SmBackupPolicyId    : 1
+    CloneHostName       : SCSPR0054212005.mycompany.com
+    CloneHostId         : 4
+    CloneName           : Draper__clone__08-03-2015_14.43.53
+    SourceResources     : {Don, Betty, Bobby, Sally}
+    ClonedResources     : {Don_DRAPER, Betty_DRAPER, Bobby_DRAPER, Sally_DRAPER}
+    SmJobError          :
+----
+
+
+--
+====

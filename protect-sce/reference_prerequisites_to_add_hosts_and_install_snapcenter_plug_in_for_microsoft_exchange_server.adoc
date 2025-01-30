@@ -1,0 +1,177 @@
+---
+permalink: protect-sce/reference_prerequisites_to_add_hosts_and_install_snapcenter_plug_in_for_microsoft_exchange_server.html 
+sidebar: sidebar 
+keywords: SnapCenter Plug-in for Microsoft Exchange Server 
+summary: 在添加主机并安装插件软件包之前，您必须满足所有要求。 
+---
+= 添加主机和安装适用于 Microsoft Exchange Server 的 SnapCenter 插件的前提条件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在添加主机并安装插件软件包之前，您必须满足所有要求。
+
+* 如果使用的是 iSCSI ，则 iSCSI 服务必须正在运行。
+* 您必须具有具有本地管理员权限的域用户，并在远程主机上具有本地登录权限。
+* 您必须对独立和数据库可用性组配置使用 Microsoft Exchange Server 2013 ， 2016 或 2019 。
+* 在 Windows 主机上安装插件时，如果您指定的凭据不是内置的，或者用户属于本地工作组用户，则必须在主机上禁用 UAC 。
+* 如果您在 SnapCenter 中管理集群节点，则必须具有对集群中所有节点具有管理权限的用户。
+* 您必须具有对 Exchange Server 具有管理权限的用户。
+* 如果已安装 SnapManager for Microsoft Exchange Server 和 SnapDrive for Windows ，则必须先注销 SnapDrive for Windows 使用的 VSS 硬件提供程序，然后才能在同一 Exchange Server 上安装适用于 Exchange 的插件，以确保使用 SnapCenter 成功保护数据。
+* 如果 SnapManager for Microsoft Exchange Server 和 Plug-in for Exchange 安装在同一台服务器上，则必须暂停或从 Windows 计划程序中删除 SnapManager for Microsoft Exchange Server 创建的所有计划。
+* 主机必须可从服务器解析为完全限定域名（ FQDN ）。如果修改了 hosts 文件以使其可解析，并且在 hosts 文件中同时指定了短名称和 FQDN ，请在 SnapCenter hosts 文件中以以下格式创建一个条目： _<IP_address> <host_FQDN> <host_name>_ 。
+* 确保防火墙中未阻止以下端口，否则添加主机操作将失败。要解析此问题描述，必须配置动态端口范围。有关详细信息，请参见 https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-rpc-dynamic-port-allocation-with-firewalls["Microsoft 文档"^]。
++
+** 对于 Windows 2016 和 Exchange 2016 ，端口范围为 50000 - 51000
+** 对于 Windows 2012 R2 和 Exchange 2013 ，端口范围为 6000 - 6500
+** 对于 Windows 2019 ，端口范围为 49152 - 65536
+
+
+
+
+[NOTE]
+====
+要确定端口范围，请执行以下命令：
+
+* netsh int ipv4 show dynamicport tcp
+* netsh int ipv4 show dynamicport udp
+* netsh int ipv6 show dynamicport tcp
+* netsh int ipv6 show dynamicport udp
+
+
+====
+
+
+== 安装适用于 Windows 的 SnapCenter 插件软件包的主机要求
+
+在安装适用于 Windows 的 SnapCenter 插件软件包之前，您应熟悉一些基本的主机系统空间要求和规模估算要求。
+
+|===
+| 项目 | 要求 
+
+
+ a| 
+操作系统
+ a| 
+Microsoft Windows
+
+有关受支持版本的最新信息，请参见 https://imt.netapp.com/matrix/imt.jsp?components=121074;&solution=1257&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+
+
+ a| 
+主机上 SnapCenter 插件的最小 RAM
+ a| 
+1 GB
+
+
+
+ a| 
+主机上 SnapCenter 插件的最小安装和日志空间
+ a| 
+5 GB
+
+
+NOTE: 您应分配足够的磁盘空间并通过 logs 文件夹监控存储消耗。所需的日志空间因要保护的实体数量和数据保护操作的频率而异。如果没有足够的磁盘空间，则不会为最近运行的操作创建日志。
+
+
+
+ a| 
+所需的软件包
+ a| 
+* 以8.0.5开头的.NET核心、包括所有后续的.NET 8修补程序
+* PowerShell核心7.4.2
+* Java 11 Oracle Java和OpenJDK
+
+
+有关受支持版本的最新信息，请参见 https://imt.netapp.com/matrix/imt.jsp?components=121074;&solution=1257&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+对于。 NET的特定故障排除信息，请参阅 https://kb.netapp.com/mgmt/SnapCenter/SnapCenter_upgrade_or_install_fails_with_This_KB_is_not_related_to_the_OS["对于没有Internet连接的原有系统、SnapCenter 升级或安装失败。"]
+
+|===
+
+
+== 需要 Exchange Server 特权
+
+要使 SnapCenter 能够添加 Exchange Server 或 DAG ，并在主机或 DAG 上安装适用于 Microsoft Exchange Server 的 SnapCenter 插件，您必须为 SnapCenter 配置具有一组最低权限的用户凭据。
+
+您必须拥有具有本地管理员权限的域用户，并在远程 Exchange 主机上具有本地登录权限，同时还必须拥有 DAG 中所有节点的管理权限。域用户需要以下最低权限：
+
+* Add-MailboxDatabaseCopy
+* 卸载数据库
+* Get-AdServerSettings
+* Get-DatabaseAvailabilityGroup
+* Get-ExchangeServer
+* get-mailboxdatabase
+* Get-MailboxDatabaseCopyStatus
+* Get-MailboxServer
+* Get-MailboxStatistics
+* Get-PublicFolderDatabase
+* move-ActiveMailboxDatabase
+* move-DatabasePath -ConfigurationOnly ： $true
+* 挂载数据库
+* new-mailboxdatabase
+* New-PublicFolderDatabase
+* remove-mailboxdatabase
+* Remove-MailboxDatabaseCopy
+* Remove-PublicFolderDatabase
+* Resume-MailboxDatabaseCopy
+* Set-AdServerSettings
+* set-mailboxdatabase -allowfilerestore ： $true
+* Set-MailboxDatabaseCopy
+* Set-PublicFolderDatabase
+* 暂停邮箱 DatabaseCopy
+* update-MailboxDatabaseCopy
+
+
+
+
+== 安装适用于 Windows 的 SnapCenter 插件软件包的主机要求
+
+在安装适用于 Windows 的 SnapCenter 插件软件包之前，您应熟悉一些基本的主机系统空间要求和规模估算要求。
+
+|===
+| 项目 | 要求 
+
+
+ a| 
+操作系统
+ a| 
+Microsoft Windows
+
+有关受支持版本的最新信息，请参见 https://imt.netapp.com/matrix/imt.jsp?components=121074;&solution=1257&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+
+
+ a| 
+主机上 SnapCenter 插件的最小 RAM
+ a| 
+1 GB
+
+
+
+ a| 
+主机上 SnapCenter 插件的最小安装和日志空间
+ a| 
+5 GB
+
+
+NOTE: 您应分配足够的磁盘空间并通过 logs 文件夹监控存储消耗。所需的日志空间因要保护的实体数量和数据保护操作的频率而异。如果没有足够的磁盘空间，则不会为最近运行的操作创建日志。
+
+
+
+ a| 
+所需的软件包
+ a| 
+* 以8.0.5开头的.NET核心、包括所有后续的.NET 8修补程序
+* PowerShell核心7.4.2
+* Java 11 Oracle Java和OpenJDK
+
+
+有关受支持版本的最新信息，请参见 https://imt.netapp.com/matrix/imt.jsp?components=121074;&solution=1257&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+对于。 NET的特定故障排除信息，请参阅 https://kb.netapp.com/mgmt/SnapCenter/SnapCenter_upgrade_or_install_fails_with_This_KB_is_not_related_to_the_OS["对于没有Internet连接的原有系统、SnapCenter 升级或安装失败。"]
+
+|===
