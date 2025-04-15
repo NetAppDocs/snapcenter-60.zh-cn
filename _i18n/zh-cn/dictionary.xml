@@ -5804,7 +5804,6 @@
   <block id="f367d650e57088caf7b808e01235016d" category="inline-link">如何使用 SnapCenter 从 SMBR 中的二级存储还原</block>
   <block id="41b4c689a8b0e3ba8bfecb2a1e608e46" category="list-text"><block ref="41b4c689a8b0e3ba8bfecb2a1e608e46" category="inline-link-rx"></block></block>
   <block id="f004280f6db6ea5f9302c9851388d751" category="inline-link">使用 SMBR 从 SnapVault 恢复 Microsoft Exchange 邮件</block>
-  <block id="1b0fb59a5bc951f7dc82cb43fe362145" category="list-text"><block ref="00a76af185a73b84e54e96058031aef5" category="inline-link-rx"></block></block>
   <block id="e1470cbc380c0e4285ea434aa1f30381" category="doc">准备用于 SnapMirror 和 SnapVault 复制的存储系统</block>
   <block id="e53c11d95478892635e2a7753106adc5" category="summary">在添加主机并安装插件软件包之前，您必须满足所有要求。</block>
   <block id="690761e3a499ee562da842d3bd6f2db0" category="doc">添加主机和安装适用于 Microsoft Exchange Server 的 SnapCenter 插件的前提条件</block>
@@ -8409,7 +8408,6 @@
   <block id="2a1a78f96ec6b03f3ccdd06b708e6f1a" category="list-text">（可选）将适用于 SQL Server 的 SnapCenter 插件配置文件从灾难恢复（ DR ）备份更换到新计算机。</block>
   <block id="9f2c74676fb5b339a2fd4a0ccd75bd1e" category="list-text">从灾难恢复备份中的适用于 SQL Server 的 SnapCenter 插件文件夹导入 Windows 和 SQL 计划。</block>
   <block id="27e7993c4841ae5fd670cdd945ccb96d" category="inline-link-macro">灾难恢复 API</block>
-  <block id="ab9238ca6f628634f6f6f2cf63502cdb" category="paragraph">观看 <block ref="44de5c9fafab2e4e76e19e3717abc2e2" category="inline-link-macro-rx"></block> 视频。</block>
   <block id="a8827ae14ad272b19b5554bf29b0dd50" category="summary">在适用于 SQL Server 的 SnapCenter 插件主存储恢复联机后，您应故障恢复到主存储。</block>
   <block id="c259d7aac6b257b97bf45bb54cdbfb28" category="doc">从适用于 SQL Server 的 SnapCenter 插件二级存储故障恢复到主存储</block>
   <block id="7ffc5c3595639b4cfa7e25819a476178" category="list-text">从 " 受管主机 " 页面将适用于 SQL Server 的 SnapCenter 插件置于 * 维护 * 模式。</block>
@@ -9970,4 +9968,6 @@
   <block id="27c157ca432e76f965ac30465e4a7d94" category="paragraph">您可以配置网络负载平衡(NLB)来设置SnapCenter高可用性。您应在SnapCenter安装之外手动配置NLB以实现高可用性。</block>
   <block id="fc8e535c7339f77157a0f93f32cb1f80" category="list-text">对象存储备份不支持Oracle和SAP HANA挂载和目录工作流、但快照支持这些工作流。</block>
   <block id="2128757ca4207f5d5000cd4894d8c58f" category="list-text">对象存储备份不支持Oracle PDB克隆、但快照支持此克隆。</block>
+  <block id="c23d56866a5b11fd0d8dc189fcf21298" category="list-text"><block ref="341e3fddad4b27511133b6917a75bb8a" category="inline-link-rx"></block></block>
+  <block id="57cf9c4ee485623172a5c60cbee423a4" category="paragraph">观看 <block ref="96716f545c5cf1a209bf10c1a798ce38" category="inline-link-macro-rx"></block> 视频。</block>
 </blocks>
