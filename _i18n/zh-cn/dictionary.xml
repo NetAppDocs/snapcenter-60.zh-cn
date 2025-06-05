@@ -4914,7 +4914,6 @@
   <block id="0b12a00876503fb1813afee6ad9b0a76" category="list-text">ORA_TemMP用于指定临时文件的目录。</block>
   <block id="e1ab4aa639aa539548c7d55759dc7004" category="list-text">oracle_home指定Oracle软件的安装目录。</block>
   <block id="57808f9033b6670d0e1ff1ecc8197488" category="list-text">archive_log_only用于指定是否备份归档日志。</block>
-  <block id="6d6058c414d1170875e11ce8a19484f0" category="list-text">oracle_backup_mode指定是执行联机备份还是脱机备份。</block>
   <block id="c4e433903376436b2e77e2cfdc6f5913" category="summary">如果某个NetApp支持的插件资源不属于任何资源组，则可以从“资源”页面备份该资源。您可以按需备份资源，或者，如果资源已附加策略并配置了计划，则会根据计划自动进行备份。</block>
   <block id="6ce5278b296a0a5a39af4a4d0cbd927c" category="doc">备份各个NetApp支持的插件资源</block>
   <block id="4d1df2561c7f84f9fdcbf35605a3f16a" category="paragraph">单击 <block ref="6baddd7f5b485bce282661b4e4579f17" category="inline-image-macro-rx" type="image"></block>，然后选择主机名和资源类型以筛选资源。然后、您可以单击 <block ref="6baddd7f5b485bce282661b4e4579f17" category="inline-image-macro-rx" type="image"></block> 以关闭筛选器窗格。</block>
@@ -7992,7 +7991,6 @@
   <block id="953acf14bebe77c11e648186f3957214" category="list-text">您必须具有对 SQL Server 具有 sysadmin 权限的用户。</block>
   <block id="d165009fc919b7c43f63036983c47ae0" category="paragraph">适用于 Microsoft SQL Server 的 SnapCenter 插件使用 Microsoft VDI Framework ，这需要 sysadmin 访问权限。</block>
   <block id="9221af74572734362746f0af9104d884" category="inline-link">Microsoft 支持文章 2926557 ： SQL Server VDI 备份和还原操作需要 sysadmin 特权</block>
-  <block id="c081ea6f4c7f13224651487050d87831" category="paragraph"><block ref="c081ea6f4c7f13224651487050d87831" category="inline-link-rx"></block></block>
   <block id="9c9a08a242e9f6311be9fa5bd945d582" category="list-text">如果安装了 SnapManager for Microsoft SQL Server ，则必须已停止或禁用此服务和计划。</block>
   <block id="1931c747684bb6010ac638ae2be606b3" category="paragraph">如果您计划将备份或克隆作业导入到 SnapCenter 中，请勿卸载适用于 Microsoft SQL Server 的 SnapManager 。</block>
   <block id="024ecfe0da835b1f362b5e64ec1408ab" category="list-text">主机必须可从服务器解析为完全限定域名（ FQDN ）。</block>
@@ -9006,11 +9004,9 @@
   <block id="430bb58f6ef28c742787a646394cc85d" category="summary">SnapCenter软件6.0版包括几项新功能和增强功能。</block>
   <block id="c93a09afa54abf05ddd4770e3b2343a1" category="doc">SnapCenter软件6.0中的新增功能</block>
   <block id="6f8d85621ec7e8c73c4ba859ec9c7469" category="inline-link-macro">支持企业级工作负载插件并支持NetApp</block>
-  <block id="478831acf82b0a4b3818fd65c592a742" category="cell"><block ref="478831acf82b0a4b3818fd65c592a742" category="inline-link-macro-rx"></block></block>
   <block id="3be8c0bcb79f27206e60c05521a2483c" category="paragraph">SnapCenter提供了一些插件来管理PostgreSQL、MySQL和IBM DB2等工作负载。您可以自动发现、备份、还原、挂载和克隆工作负载。</block>
   <block id="1fa76ac55ad0967716ac4dfee12b4407" category="paragraph">SnapCenter还提供了一些插件来管理SAP ASE、SAP MaxDB、MongoDB、Oracle应用程序和ONTAP存储等工作负载。您可以备份、还原和克隆工作负载。</block>
   <block id="1ef9e52684a20f666e12e341c8ef8ce1" category="inline-link-macro">支持在云和内部工作负载中使用Linux版本的SnapCenter</block>
-  <block id="8759eb4a15f0954f1ffe6a1ba0fcb91b" category="cell"><block ref="8759eb4a15f0954f1ffe6a1ba0fcb91b" category="inline-link-macro-rx"></block></block>
   <block id="1cbe08eda60fa869e0f775f6bb3d2581" category="paragraph">现在、可以为Red Hat Enterprise Linux (RHEL)、Oracle Linux和SUSE Linux Enterprise Server (SLES)等Linux模式提供单独的SnapCenter二进制文件。</block>
   <block id="7daff1874dce5a11aba2586028b0c18f" category="list-text">支持Azure NetApp Files、Amazon FSx for NetApp ONTAP、Cloud Volumes ONTAP和ONTAP存储。</block>
   <block id="762100fcdd1477c85af12beef8cd62c3" category="list-text">适用于Red Hat Enterprise Linux (RHEL)、Oracle Linux和SUSE Linux Enterprise Server (SLES)等Linux模式的单独二进制文件。</block>
@@ -9018,23 +9014,18 @@
   <block id="1dbcbbe14ef1a2328b3e7e8b86a02d30" category="list-text">支持PostgreSQL、MySQL和MongoDB等现代工作负载。</block>
   <block id="42e9bb4040dfb564c8bc793490bd7ba6" category="list-text">支持用于ONTAP卷和Linux文件系统的插件、用于保护任何不受支持的或自行开发的应用程序。</block>
   <block id="4f53b479c6b47d73b1fdb28f399b1301" category="inline-link-macro">支持SnapMirror主动同步</block>
-  <block id="a757709afe5913a9ac546212ec3e1688" category="cell"><block ref="a757709afe5913a9ac546212ec3e1688" category="inline-link-macro-rx"></block></block>
   <block id="426704b1f334cde736f8e5ff800c0a22" category="paragraph">现在、您可以使用SnapCenter配置SnapMirror主动同步功能、并有效地备份、还原和克隆数据库和VMware VM的SAN工作负载。这样可以确保透明的应用程序故障转移和业务连续性。</block>
   <block id="e030f85ea3742a8498cd3f4ce5f26a2f" category="inline-link-macro">通过SMB3支持Microsoft SQL Server</block>
-  <block id="c550e496e988fba14212cef600247fed" category="cell"><block ref="c550e496e988fba14212cef600247fed" category="inline-link-macro-rx"></block></block>
   <block id="729dead3f3fe6b0217c2f68871edb8ee" category="paragraph">现在、您可以在ONTAP、Azure NetApp Files、Amazon FSx for NetApp ONTAP和Cloud Volumes ONTAP中使用SnapCenter保护基于SMB3协议部署的Microsoft SQL Server数据库。</block>
   <block id="534b29f3d774d1d19d1dc1030cdc4b3d" category="inline-link-macro">支持NVMe/TCP</block>
-  <block id="98d7af4aa50fe1e0cd7013f44cc2cebc" category="cell"><block ref="98d7af4aa50fe1e0cd7013f44cc2cebc" category="inline-link-macro-rx"></block></block>
   <block id="cadb0ed69287e5a4f65d1590e5e42a58" category="paragraph">SnapCenter现在支持基于TCP协议的NVMe、用于备份和恢复应用程序和文件系统。</block>
   <block id="bcaa0376902365340dff7a0ee422b390" category="cell">支持VMware vSphere虚拟卷(vvol)</block>
   <block id="d0942f199de3f390337f613419cc5b6d" category="paragraph">现在、您可以使用保护部署在SnapCenter上的数据库和文件系统。</block>
   <block id="180a2e8c671bfb57b670570970b59480" category="summary">6.0.1版本的SnapCenter软件包括多项新功能和增强功能。</block>
   <block id="f5db6e0b0a7608b32dd00dbb85353e53" category="doc">SnapCenter 6.0.1中的新增功能</block>
   <block id="0ee351a583abf7baa869129519adaddb" category="inline-link-macro">支持Azure NetApp Files备份</block>
-  <block id="4396a053fce24f7f396ccf91773d1924" category="cell"><block ref="4396a053fce24f7f396ccf91773d1924" category="inline-link-macro-rx"></block></block>
   <block id="6d3c36ceae85dfee8b7d9ccb6f9daa41" category="paragraph">现在、您可以使用SnapCenter将驻留在Azure NetApp Files上的应用程序备份和克隆到Azure Blb存储(对象存储)。</block>
   <block id="f47390dbd7bff67c8e4d16001f8c4395" category="inline-link-macro">支持在Linux上运行的SnapCenter的高可用性</block>
-  <block id="c382d5571738a226abf22d83f911bf29" category="cell"><block ref="c382d5571738a226abf22d83f911bf29" category="inline-link-macro-rx"></block></block>
   <block id="dc3cf03517bc0034c89608c70487dd43" category="paragraph">现在、对SnapCenter HA配置的支持已扩展到Linux系统。您可以在此配置中使用标准负载平衡器：</block>
   <block id="cf70dd989291fe3c73323dca9c132c7a" category="list-text">F5负载平衡器</block>
   <block id="3a5261cb56e1fc4dcab4467255cb2f77" category="list-text">Microsoft网络负载平衡(NLB)</block>
@@ -9042,10 +9033,8 @@
   <block id="00c0ea0ebc04a689882db84f8ac573b8" category="list-text">弹性负载平衡(ELB)</block>
   <block id="30b49d6d7f72510603794f5cddeb0f51" category="list-text">Azure负载平衡器</block>
   <block id="2f95a365481f255b94a459c0cdbe6403" category="inline-link-macro">能够管理计划的备份作业</block>
-  <block id="ed432f9ce52c9850999f7b028aad79ff" category="cell"><block ref="ed432f9ce52c9850999f7b028aad79ff" category="inline-link-macro-rx"></block></block>
   <block id="45504f3ad62432af1eda619e4b060b8a" category="paragraph">现在、您可以根据系统硬件配置为计划的作业设置一个阈值、以控制要在任何给定时间运行的备份数量。</block>
   <block id="4001d0b97ee7312467d6a3f7954548e2" category="inline-link-macro">能够管理陈旧作业</block>
-  <block id="df630e1703b2829b32d71f57dd02d24e" category="cell"><block ref="df630e1703b2829b32d71f57dd02d24e" category="inline-link-macro-rx"></block></block>
   <block id="d76b0a3fe3eb0d4b24bd1965df4f6005" category="paragraph">现在、您可以设置一个预定义的计划来清除滞留72小时以上的陈旧作业。</block>
   <block id="8a30edb275ecde423390e79fd8e6f1b2" category="cell">在AIX上运行的IBM DB2、Oracle应用程序和存储插件包含数据保护功能</block>
   <block id="7d8509e50a4a8e004140e403e5253c3c" category="paragraph">支持对AIX上运行的IBM DB2、Oracle应用程序和存储插件进行数据保护。</block>
@@ -9970,4 +9959,16 @@
   <block id="2128757ca4207f5d5000cd4894d8c58f" category="list-text">对象存储备份不支持Oracle PDB克隆、但快照支持此克隆。</block>
   <block id="c23d56866a5b11fd0d8dc189fcf21298" category="list-text"><block ref="341e3fddad4b27511133b6917a75bb8a" category="inline-link-rx"></block></block>
   <block id="57cf9c4ee485623172a5c60cbee423a4" category="paragraph">观看 <block ref="96716f545c5cf1a209bf10c1a798ce38" category="inline-link-macro-rx"></block> 视频。</block>
+  <block id="17103b09b3247a2b39032b11b995b325" category="list-text">ORACLE_BACKUPMODE 指定是否执行在线还是离线备份。</block>
+  <block id="e787bc810fe0c9919da5538cad8cb1f1" category="list-text">ORACLE_EXPORT_PARAMETERS 指定在运行 /bin/su &lt;user running sqlplus&gt; -c sqlplus /nolog &lt;cmd&gt; 时是否应重新导出上述定义的环境变量。通常情况下，当运行 sqlplus 的用户尚未设置使用 connect / as sysdba 连接数据库所需的所有环境变量时，就会出现这种情况。</block>
+  <block id="cb5d59c817a7392efa454c9c69508067" category="paragraph"><block ref="cb5d59c817a7392efa454c9c69508067" category="inline-link-rx"></block></block>
+  <block id="6031eb6179af6443a243be6f3afc89c2" category="cell"><block ref="6031eb6179af6443a243be6f3afc89c2" category="inline-link-macro-rx"></block></block>
+  <block id="e3d54a63247a6c8d00eaf0d0ac350f66" category="cell"><block ref="e3d54a63247a6c8d00eaf0d0ac350f66" category="inline-link-macro-rx"></block></block>
+  <block id="b73dff6504fdf896cc81438ec499aab3" category="cell"><block ref="b73dff6504fdf896cc81438ec499aab3" category="inline-link-macro-rx"></block></block>
+  <block id="3ce8e1b4bdbfdbe1843642987ac78d9a" category="cell"><block ref="3ce8e1b4bdbfdbe1843642987ac78d9a" category="inline-link-macro-rx"></block></block>
+  <block id="a0866064b422737fcd7207ed89918334" category="cell"><block ref="a0866064b422737fcd7207ed89918334" category="inline-link-macro-rx"></block></block>
+  <block id="9551046b2a6d7559b8a83b5aef929c46" category="cell"><block ref="9551046b2a6d7559b8a83b5aef929c46" category="inline-link-macro-rx"></block></block>
+  <block id="6a09e8e469719d9f6e6929ebf67fe7fb" category="cell"><block ref="6a09e8e469719d9f6e6929ebf67fe7fb" category="inline-link-macro-rx"></block></block>
+  <block id="79ea5e6fb1fadf858a6095790bac1d7a" category="cell"><block ref="79ea5e6fb1fadf858a6095790bac1d7a" category="inline-link-macro-rx"></block></block>
+  <block id="146c2281358e7c759a0fe95a6f5c19ed" category="cell"><block ref="146c2281358e7c759a0fe95a6f5c19ed" category="inline-link-macro-rx"></block></block>
 </blocks>
