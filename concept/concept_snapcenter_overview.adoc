@@ -50,13 +50,7 @@ SnapCenter 包括以下主要功能：
 
 * 集中式应用程序一致的数据保护
 +
-支持对Microsoft Exchange Server、Microsoft SQL Server、Linux或AIX上的Oracle数据库、SAP HANA数据库、IBM DB2、PostgreSQL、MySQL以及ONTAP系统上运行的Windows主机文件系统进行数据保护。
-
-+
-通过提供一个用于创建用户定义的 SnapCenter 插件的框架，其他标准或自定义应用程序和数据库也支持数据保护。这样就可以通过同一个单一管理平台为其他应用程序和数据库提供数据保护。通过利用此框架、NetApp发布了适用于MongoDB、存储、MaxDB、Sybase ASE和ORASCPM的SnapCenter插件。除此之外、您还可以使用开发人员指南创建自己的插件。
-
-+
-link:../protect-scc/develop_a_plug_in_for_your_application.html["为您的应用程序开发一个插件"]
+支持对Microsoft Exchange Server、Microsoft SQL Server、Linux或AIX上的Oracle数据库、SAP HANA数据库、IBM DB2、PostgreSQL、MySQL以及ONTAP系统上运行的Windows主机文件系统进行数据保护。SnapCenter 还支持 MongoDB、Storage、MaxDB、Sybase ASE 和 ORASCPM 等应用程序的保护。
 
 * 基于策略的备份
 +
@@ -220,7 +214,7 @@ SnapCenter服务器支持Microsoft Windows和Linux (RHEL 8.x、RHEL 9.x、SLES 1
 如果您使用的是适用于Linux的SnapCenter插件软件包或适用于AIX的SnapCenter插件软件包、则会使用Quartz计划程序集中执行计划。
 
 * 对于适用于 Oracle 数据库的 SnapCenter 插件，在 SnapCenter 服务器主机上运行的主机代理会与在 Linux 或 AIX 主机上运行的 SnapCenter 插件加载程序（ SPL ）进行通信，以执行不同的数据保护操作。
-* 对于适用于 SAP HANA 数据库的 SnapCenter 插件和 SnapCenter 自定义插件， SnapCenter 服务器通过在主机上运行的 SCCore 代理与这些插件进行通信。
+* 对于适用于 SAP HANA 数据库的 SnapCenter 插件，SnapCenter 服务器通过在主机上运行的 SCCore 代理与插件进行通信。
 
 
 SnapCenter 服务器和插件使用 HTTPS 与主机代理进行通信。有关 SnapCenter 操作的信息存储在 SnapCenter 存储库中。
@@ -306,19 +300,6 @@ Linux 或 AIX
 适用于 UNIX 的插件或适用于 Windows 的插件
  a| 
 HDBSQL 客户端主机
- a| 
-Linux 或 Windows
-
-
-
- a| 
-自定义插件
- a| 
-适用于 Linux 的插件软件包和适用于 Windows 的插件软件包
- a| 
-对于文件系统备份，请使用适用于 Windows 的插件
- a| 
-自定义应用程序主机
  a| 
 Linux 或 Windows
 
@@ -500,7 +481,7 @@ NetApp支持的插件包括MongoDB、ORASCPM (Oracle应用程序)、SAP ASE、SA
 
 * 支持使用其他插件来管理其他SnapCenter插件不支持的应用程序或数据库。NetApp支持的插件不会在SnapCenter安装中提供。
 * 支持在另一个卷上为备份集创建镜像副本，并执行磁盘到磁盘备份复制。
-* 同时支持 Windows 和 Linux 环境。在 Windows 环境中，通过自定义插件的自定义应用程序可以选择使用适用于 Microsoft Windows 的 SnapCenter 插件进行文件系统一致的备份。
+* 同时支持 Windows 和 Linux 环境。
 
 
 
