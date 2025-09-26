@@ -9551,4 +9551,5 @@
   <block id="401632ff9d010db44abc6611b886a1fb" category="paragraph">*最佳实践：*注销并重新登录，或打开新的浏览器来访问SnapCenter用户界面。</block>
   <block id="2894135a685829401e009e2fb1bc8cfe" category="paragraph">如果SnapCenter显示服务器主机状态为已停止，请等待一段时间并执行新的发现。您还可以将 *HostRefreshInterval* 参数的值（默认值为 3600 秒）更改为任何大于 10 分钟的值。</block>
   <block id="cc8f8aee65ee74fabf32da5ac0a4b95c" category="list-text">如果升级失败，请清理失败的安装，重新安装以前的SnapCenter版本，并将 NSM 数据库恢复到以前的状态。</block>
+  <block id="88d9e24753477cfb09f25b21c0a59b9e" category="paragraph">SnapCenter完成 Snapshot 操作后对SnapMirror和SnapVault执行更新。 SnapMirror和SnapVault更新作为SnapCenter作业的一部分执行。如果您正在使用SnapMirror主动同步，则对于SnapMirror主动同步和异步关系，请使用默认SnapMirror或SnapVault计划。</block>
 </blocks>
