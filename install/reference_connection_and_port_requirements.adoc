@@ -37,7 +37,7 @@ summary: 在安装 SnapCenter 服务器和应用程序或数据库插件之前�
 
 
  a| 
-SnapCenter 端口
+SnapCenter Web 端口
  a| 
 8146 (HTTPS)、双向、可自定义、如URL _\https://server:8146_中所示
 

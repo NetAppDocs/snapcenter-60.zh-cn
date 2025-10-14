@@ -2351,7 +2351,6 @@
   <block id="29e256a27c9d420cee02c5cda005de01" category="paragraph">下表列出了不同的端口及其默认值。</block>
   <block id="3672cca688eb0474cd3fee2add1a2067" category="cell">端口类型</block>
   <block id="4d4690457f78e9e5cbfbcd0e36fbeff0" category="cell">默认端口</block>
-  <block id="ed00b70cc595a411eff2cc42510a291f" category="paragraph">SnapCenter 端口</block>
   <block id="b213e31ffc319fa7b61f00a8dfad6e75" category="paragraph">8146 (HTTPS)、双向、可自定义、如URL _\https://server:8146_中所示</block>
   <block id="57f72d0cb40826596637a0e2fc16a647" category="paragraph">用于 SnapCenter 客户端（ SnapCenter 用户）与 SnapCenter 服务器之间的通信。也用于从插件主机到 SnapCenter 服务器的通信。</block>
   <block id="c90d9871b4b86a10a62cd2bf2c1ea688" category="inline-link">使用安装向导安装SnapCenter服务器。</block>
@@ -9552,4 +9551,5 @@
   <block id="cc8f8aee65ee74fabf32da5ac0a4b95c" category="list-text">如果升级失败，请清理失败的安装，重新安装以前的SnapCenter版本，并将 NSM 数据库恢复到以前的状态。</block>
   <block id="88d9e24753477cfb09f25b21c0a59b9e" category="paragraph">SnapCenter完成 Snapshot 操作后对SnapMirror和SnapVault执行更新。 SnapMirror和SnapVault更新作为SnapCenter作业的一部分执行。如果您正在使用SnapMirror主动同步，则对于SnapMirror主动同步和异步关系，请使用默认SnapMirror或SnapVault计划。</block>
   <block id="ea1c96f839915f73d25b910bbc92b734" category="list-text">位于ONTAP FAS、 AFF或ASA主系统和辅助系统上的数据，使用NetApp备份和恢复集成保护到云中的对象和归档存储</block>
+  <block id="e6f36a956625505e0a3733e3e0073fa0" category="paragraph">SnapCenter Web 端口</block>
 </blocks>
